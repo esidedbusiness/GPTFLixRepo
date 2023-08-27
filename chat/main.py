@@ -16,7 +16,7 @@ pinecone_api_key = "fa7b9165-3e1d-47a9-ad2f-36daddd7d6bd"
 pinecone.init(api_key=pinecone_api_key, environment="us-west4-gcp-free")
 
 # openai.api_key = st.secrets["API_KEYS"]["openai"]
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 gptflix_logo = Image.open('./chat/logo.png')
