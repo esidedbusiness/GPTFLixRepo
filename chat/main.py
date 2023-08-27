@@ -10,16 +10,18 @@ import random
 
 from PIL import Image
 
-pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
+# pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
+pinecone_api_key = "fa7b9165-3e1d-47a9-ad2f-36daddd7d6bd"
 
-pinecone.init(api_key=pinecone_api_key, environment="us-east1-gcp")
+pinecone.init(api_key=pinecone_api_key, environment="us-west4-gcp-free")
 
-openai.api_key = st.secrets["API_KEYS"]["openai"]
+# openai.api_key = st.secrets["API_KEYS"]["openai"]
+openai.api_key = "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"
 
 
-#gptflix_logo = Image.open('./chat/logo.png')
+gptflix_logo = Image.open('logo.png')
 
-bens_bites_logo = Image.open('./chat/Bens_Bites_Logo.jpg')
+bens_bites_logo = Image.open('Bens_Bites_Logo.jpg')
 
 # random user picture
 user_av = random.randint(0, 100)
@@ -40,10 +42,18 @@ st.set_page_config(page_title="GPTflix", page_icon="🍿", layout="wide")
 st.header("GPTflix is like chatGPT for movie reviews!🍿\n")
 
 
+# Storing the chat
+if 'generated' not in st.session_state:
+    st.session_state['generated'] = []
+
+if 'past' not in st.session_state:
+    st.session_state['past'] = []
+
+
 # st.header("Thanks for visiting GPTflix! It's been a fun experiment, with over 4000 unique users over four weeks and an average of 10 questions per user while the site was online! Perhaps we will be back some time...🍿\n")
 
 # Define the name of the index and the dimensionality of the embeddings
-index_name = "400kmovies"
+index_name = "1kmovies"
 dimension = 1536
 
 pineconeindex = pinecone.Index(index_name)
@@ -208,9 +218,6 @@ def summarize_past_conversation(content):
         return None
 
 
-
-
-
 COMPLETIONS_API_PARAMS = {
         "temperature": 0.0,
         "max_tokens": 500,
@@ -246,14 +253,6 @@ def answer_query_with_context_pinecone(query):
         return None
 
 
-
-# Storing the chat
-if 'generated' not in st.session_state:
-    st.session_state['generated'] = []
-
-if 'past' not in st.session_state:
-    st.session_state['past'] = []
-
 def clear_text():
     st.session_state["input"] = ""
 
@@ -263,13 +262,12 @@ def get_text():
     return input_text
 
 
-
 user_input = get_text()
 
 
 if user_input:
     output = answer_query_with_context_pinecone(user_input)
-
+    print(st.session_state)
     # store the output 
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
