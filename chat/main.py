@@ -19,7 +19,7 @@ pinecone.init(api_key=pinecone_api_key, environment="us-west4-gcp-free")
 openai.api_key = "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"
 
 
-gptflix_logo = Image.open('logo.png')
+gptflix_logo = Image.open('./logo.png')
 
 bens_bites_logo = Image.open('Bens_Bites_Logo.jpg')
 
