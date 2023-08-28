@@ -7,20 +7,18 @@ import json
 from streamlit_chat import message
 import pinecone
 import random
-
 from PIL import Image
+from dotenv import load_dotenv
+load_dotenv()
 
-# pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
-pinecone_api_key = "fa7b9165-3e1d-47a9-ad2f-36daddd7d6bd"
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 pinecone.init(api_key=pinecone_api_key, environment="us-west4-gcp-free")
-
-# openai.api_key = st.secrets["API_KEYS"]["openai"]
-openai.api_key = "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"
+openai.api_key = openai_api_key
 
 
 gptflix_logo = Image.open('./chat/logo.png')
-
 bens_bites_logo = Image.open('./chat/Bens_Bites_Logo.jpg')
 
 # random user picture
