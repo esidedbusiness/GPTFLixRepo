@@ -8,11 +8,11 @@ from streamlit_chat import message
 import pinecone
 import random
 from PIL import Image
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
-pinecone_api_key = os.getenv("PINECONE_API_KEY")
-openai_api_key = os.getenv("OPENAI_API_KEY")
+pinecone_api_key = os.environ["PINECONE_API_KEY"]
+openai_api_key = os.environ["OPENAI_API_KEY"]
 
 pinecone.init(api_key=pinecone_api_key, environment="us-west4-gcp-free")
 openai.api_key = openai_api_key
